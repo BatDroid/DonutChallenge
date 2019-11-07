@@ -2,17 +2,20 @@ import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators, Dispatch} from 'redux';
+import {NavigationScreenProp} from 'react-navigation';
 import {getProducts as getProuctsApi} from '../../redux/products/actions';
 import {ProductsStoreType} from 'src/redux/products/reducers';
 import {ServerError, ScreenLoading} from '../../components';
 import ProductsList from './ProductsList';
+import screens from '../../configs/navigation/screens';
 
 interface Props extends ProductsStoreType {
   getProducts: Function;
+  navigation: NavigationScreenProp<{}>;
 }
 
 const Products = (props: Props) => {
-  const {getProducts, errorCode, isFetching, products} = props;
+  const {getProducts, errorCode, isFetching, products, navigation} = props;
   useEffect(() => {
     getProducts();
   }, []);
@@ -25,7 +28,10 @@ const Products = (props: Props) => {
       <ProductsList
         data={products}
         onItemPressed={product => {
-          console.log(product);
+          navigation.navigate(screens.product_stats, {
+            productId: product.id,
+            screenTitle: product.display_name
+          })
         }}
       />
     </SafeAreaView>
