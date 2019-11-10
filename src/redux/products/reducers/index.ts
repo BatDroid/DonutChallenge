@@ -7,7 +7,7 @@ import {
   GET_PRODUCTS_ERROR,
 } from '../actions/types';
 
-function productsReducer(
+export function productsReducer(
   state: ProductType[] | null = null,
   action: ProductAction,
 ) {
@@ -19,7 +19,7 @@ function productsReducer(
   }
 }
 
-function isFetchingReducer(state: boolean = false, action: ProductAction) {
+export function isFetchingReducer(state: boolean = false, action: ProductAction) {
   switch (action.type) {
     case GET_PRODUCTS_REQUEST:
       return true;
@@ -31,7 +31,7 @@ function isFetchingReducer(state: boolean = false, action: ProductAction) {
   }
 }
 
-function errorReducer(state: number | null = null, action: ProductAction) {
+export function errorReducer(state: number | null = null, action: ProductAction) {
   switch (action.type) {
     case GET_PRODUCTS_REQUEST:
     case GET_PRODUCTS_SUCCESS:

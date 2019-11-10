@@ -12,7 +12,7 @@ export function getProducts() {
     dispatch({
       type: GET_PRODUCTS_REQUEST,
     });
-    api
+    return api
       .get(PRODUCTS_URL)
       .then(({data}) => {
         if (data) {
